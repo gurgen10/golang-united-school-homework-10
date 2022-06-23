@@ -46,13 +46,13 @@ func BadHandler(w http.ResponseWriter, r *http.Request) {
 func DataHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	log.Println(string(body))
 
 	w.WriteHeader(http.StatusOK)
 	if len(body) > 0 {
-		fmt.Fprintf(w, "`I got message:\n%v`", string(body))
+		fmt.Fprintf(w, "I got message:\n%v", string(body))
 	}
 
 }
@@ -63,11 +63,11 @@ func HeaderHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Headers: a: %s, b: %s", a, b)
 	aVal, err := strconv.Atoi(a)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	bVal, err1 := strconv.Atoi(b)
 	if err1 != nil {
-		log.Fatal(err1)
+		log.Println(err1)
 	}
 
 	w.Header().Set("a+b", strconv.Itoa(aVal+bVal))
